@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="HangmanApp.Views.HintOverlayControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:wpfui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+             xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:local="clr-namespace:HangmanApp.Views"
+             fluentWpf:AcrylicWindow.Enabled="True">
+    <UserControl.Resources>
+        <!-- Style for the buttons with hover-scale animation -->
+        <Style TargetType="wpfui:Button">
+            <Setter Property="Background" Value="#35FFA2"/> <!-- Green color -->
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Awesome Font"/> <!-- Change font here -->
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="10"/> <!-- Add margin for spacing -->
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="wpfui:Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Content="{TemplateBinding Content}"
+                                              Margin="{TemplateBinding Padding}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="3" Opacity="0.4"/>
+                </Setter.Value>
+            </Setter>
+            <!-- Add RenderTransform for scaling animation -->
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <!-- Define triggers for mouse over effect -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                 To="1.1"
+                                                 Duration="0:0:0.3"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                 To="1.1"
+                                                 Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                 To="1"
+                                                 Duration="0:0:0.3"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                 To="1"
+                                                 Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+                                                    
+        <!-- Style for the wave border animation -->
+        <Storyboard x:Key="WaveAnimation" RepeatBehavior="Forever" AutoReverse="True">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)">
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.0" Value="1"/>
+                        <LinearDoubleKeyFrame KeyTime="0:0:1.0" Value="0.5"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </UserControl.Resources>
+        
+            <Border Background="#343633" BorderBrush="Black" BorderThickness="5" CornerRadius="10" Padding="10">
+                <StackPanel>
+                    <TextBlock Text="Game Tip!" FontSize="24" FontWeight="Bold" Foreground="#3F893C" HorizontalAlignment="Center" />
+                    <Grid Width="300" Height="300" Margin="15">
+                        <Image Source="{Binding HintImageSource}" Stretch="Uniform" />
+                        <Rectangle Stroke="Black" StrokeThickness="5" RadiusX="5" RadiusY="5">
+                            <Rectangle.Triggers>
+                                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                                    <BeginStoryboard Storyboard="{StaticResource WaveAnimation}" />
+                                </EventTrigger>
+                            </Rectangle.Triggers>
+                        </Rectangle>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </UserControl>

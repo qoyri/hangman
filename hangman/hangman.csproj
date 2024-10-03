@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    	<DisableTimestampCheck>true</DisableTimestampCheck>
+    	<ApplicationIcon>favicon.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentWPF" Version="0.10.2" />
+      <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+      <PackageReference Include="LottieSharp" Version="2.4.0" />
+      <PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0492" />
+      <PackageReference Include="MaterialDesignThemes" Version="5.1.1-ci753" />
+      <PackageReference Include="MaterialDesignThemes.MahApps" Version="3.1.1-ci753" />
+      <PackageReference Include="Npgsql" Version="8.0.3" />
+      <PackageReference Include="SharpVectors" Version="1.8.4.2" />
+      <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
+      <PackageReference Include="WPF-UI" Version="4.0.0-rc.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\menu_zelda.mp3" />
+      <EmbeddedResource Include="Resources\images\settings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Resources\menu_zelda.mp3" />
+      <None Remove="Resources\easy_zelda.mp3" />
+      <EmbeddedResource Include="Resources\easy_zelda.mp3" />
+      <None Remove="Resources\hard_zelda.mp3" />
+      <EmbeddedResource Include="Resources\hard_zelda.mp3" />
+      <None Remove="Resources\medium_zelda.mp3" />
+      <EmbeddedResource Include="Resources\medium_zelda.mp3" />
+      <None Remove="Resources\default_profile_pic.jpg" />
+      <EmbeddedResource Include="Resources\default_profile_pic.jpg" />
+      <None Remove="Resources\images\settings.json" />
+      <None Remove="Resources\images\clock.json" />
+      <EmbeddedResource Include="Resources\images\clock.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Resources\images\sound.json" />
+      <EmbeddedResource Include="Resources\images\sound.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Resources\images\victory.json" />
+      <EmbeddedResource Include="Resources\images\victory.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Resources\images\game_over.json" />
+      <EmbeddedResource Include="Resources\images\game_over.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>
